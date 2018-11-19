@@ -17,3 +17,14 @@ float Puis_Iteree(float** A, float* x_n, int n)
   return count_2;
 }
 
+float Puis_Iteree_Inverse(float** A, float* x_n, float q, int n)
+{
+  float** B  = new float*[n];
+  for(int i = 0; i<n; i++){
+    B[i] = new float[n];
+  }
+  inverse(A, B, n);
+  return Puis_Iteree(B, x_n, n);
+}
+
+
