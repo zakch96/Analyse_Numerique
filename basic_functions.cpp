@@ -1,7 +1,12 @@
 #include<iostream>
+#include<cmath>
 
 using namespace std;
 
+
+float g(float x, float y) {return (x*x +y*y)sin(x*y)}
+
+float f(float x, float y) {return sin(x*y)}
 
 
 float** Create_Matrix(int n)
