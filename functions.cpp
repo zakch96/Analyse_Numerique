@@ -119,3 +119,18 @@ bool Inverse(float** A, float** inverse, int n)
   return true; 
 } 
 
+
+float* Prod_Mat_Vec(float** A, float* b, int n)
+{
+  float* a = new float[n];
+  float count;
+  for(int i=0; i<n; i++){
+    count = 0;
+    for(int j=0; j<n; j++)
+      count += A[i][j]*b[j];
+    a[i] = count;
+  }
+  return a;
+}
+
+
