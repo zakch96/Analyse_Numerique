@@ -134,3 +134,11 @@ float* Prod_Mat_Vec(float** A, float* b, int n)
 }
 
 
+float Prod_Vec(float* x, float* y, int n)
+{
+  float count = 0;
+  for(int i=0; i<n; i++)
+    count += x[i]*y[i];
+  return count;
+}
+
