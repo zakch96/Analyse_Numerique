@@ -1,5 +1,4 @@
 #include<iostream>
-#include<cmath>
 
 using namespace std;
 
@@ -16,7 +15,7 @@ float** Create_Matrix(int n)
 }
 
 
-float*** Create_Array_Matrix(int size, int n)
+float*** Create_Array_Of_Matrix(int size, int n)
 {
   float*** Array;
   Array = new float**[size];
@@ -30,7 +29,7 @@ float*** Create_Array_Matrix(int size, int n)
 }
 
 
-void getCofactor(float** A, float** temp, int p, int q, int n) 
+void Get_Cofactor(float** A, float** temp, int p, int q, int n) 
 { 
   int i = 0, j = 0; 
   
@@ -51,7 +50,7 @@ void getCofactor(float** A, float** temp, int p, int q, int n)
 
 
 
-float determinant(float** A, int n) 
+float Determinant(float** A, int n) 
 { 
   float D = 0; 
   if (n == 1) 
@@ -62,8 +61,8 @@ float determinant(float** A, int n)
   int sign = 1;  
   for (int f = 0; f < n; f++) 
     {  
-      getCofactor(A, temp, 0, f, n); 
-      D += sign * A[0][f] * determinant(temp, n - 1);  
+      Get_Cofactor(A, temp, 0, f, n); 
+      D += sign * A[0][f] * Determinant(temp, n - 1);  
       sign = -sign; 
     } 
   return D; 
@@ -85,7 +84,7 @@ float** Prod_Mat(float** L, float** A, int n)
 
 
 
-void adjoint(float** A, float** adj, int n) 
+void Adjoint(float** A, float** adj, int n) 
 { 
   if (n == 1){ 
     adj[0][0] = 1; 
@@ -95,25 +94,25 @@ void adjoint(float** A, float** adj, int n)
   for (int i=0; i<n; i++) { 
     for (int j=0; j<n; j++) 
       { 
-	getCofactor(A, temp, i, j, n); 
+	Get_Cofactor(A, temp, i, j, n); 
 	if((i+j) % 2 == 0)
 	  sign = 1;
 	else
 	  sign = -1;
-	adj[j][i] = (sign)*(determinant(temp, n-1)); 
+	adj[j][i] = (sign)*(Determinant(temp, n-1)); 
       } 
   } 
 } 
 
-bool inverse(float** A, float** inverse, int n) 
+bool Inverse(float** A, float** inverse, int n) 
 { 
-  float det = determinant(A, n); 
+  float det = Determinant(A, n); 
   if (det == 0) 
     {  
       return false; 
     }   
   float** adj = Create_Matrix(n); 
-  adjoint(A, adj, n); 
+  Adjoint(A, adj, n); 
   for (int i=0; i<n; i++) 
     for (int j=0; j<n; j++) 
       inverse[i][j] = adj[i][j]/det; 
