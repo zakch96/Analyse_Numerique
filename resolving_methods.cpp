@@ -1,3 +1,44 @@
+float* Descente(float** A, int dim, float* vec)
+{
+  float* vec1 = new float[dim];
+  for(int i=0; i<dim; i++)
+    if(A[i][i] == 0)
+      exit(1);
+  vec1[0] = vec[0]/A[0][0];
+  for(int i=1; i<dim; i++){
+    vec1[i] = vec[i]; 
+      for(int j=0; j<i; j++)
+	vec1[i] -= A[i][j]*vec1[j];
+      vec1[i] = vec1[i]/A[i][i];
+  }
+  return vec1;
+}
+
+
+
+
+float* Remonte(float** A, int dim, float* vec)
+{
+  float* vec1 = new float[dim];
+  for(int i=0; i<dim; i++)
+    if(A[i][i] == 0)
+      exit(1);
+  vec1[dim-1] = vec[dim-1]/A[dim-1][dim-1];
+  for(int i=1; i<dim; i++){
+    vec1[dim-1-i] = vec[dim-1-i]; 
+      for(int j=dim-i; j<dim; j++)
+	vec1[dim-1-i] -= A[dim-1-i][j]*vec1[j];
+      vec1[dim-1-i] = vec1[dim-1-i]/A[dim-1-i][dim-1-i];
+  }
+  return vec1;
+}
+
+
+
+
+
+
+
 float*** Cholesky_Factorization(float** A,int n)
 {
   float*** C; 
