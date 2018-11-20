@@ -164,3 +164,37 @@ float* Grad_Conjug(float** A, float* b, float* x_k, int n)
 }
 
 
+
+
+
+float** Cholesky_Decomp(float** A, int dim)
+{
+  float count;
+  float** T = new float*[n];
+  for(int i=0; i<n; i++)
+    T[i] = new float[n];
+  T[0][0] = sqrt(A[0][0]);
+  for(int i=0; i<dim; i++){
+    for(int j=0; j<dim; j++){
+      if(i>j)
+	T[i][j] = 0;
+      if(j>=1)
+	T[0][j] = T[0][0]/A[0][j];
+      count =0;
+      if(i>=1){
+	for(int k=0; k<i; k++)
+	  count += T[k][i]*T[k][i];
+	T[i][i] = sqrt(A[i][i] - count);
+      }
+      count =0;
+      if(j>i){
+	for(int k=0; k<i; k++)
+	  count += T[k][i]*T[k][j];
+	T[i][j] = (A[i][j] - count)/T[i][i];
+      }	
+    }
+  }
+	return T;		
+}
+
+
