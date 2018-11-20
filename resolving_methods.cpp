@@ -43,6 +43,7 @@ float* Relax(float** A, float* b, float* u_k, int n, float w)
 
 float* Grad_Conjug(float** A, float* b, float* x_k, int n)
 {
+  int count_itere = 0;
   float* r_k = new float[n];
   float* p_k = new float[n];
   float* r_k_1 = new float[n];
@@ -62,8 +63,11 @@ float* Grad_Conjug(float** A, float* b, float* x_k, int n)
       x_k_1[i] = x_k[i] + alpha_k*p_k[i];
       r_k_1[i] = r_k[i] + alpha_k*p_k[i];
     }
-    if("r_k_1 est suffisamment petit")
+    count_itere++;
+    if("r_k_1 est suffisamment petit"){
+      cout << "le nombre d'itérations est" << count_itere << endl;
       return x_k_1;
+    }
     beta_k = Prod_Vec(r_k_1, r_k_1, n)/Prod_Vec(r_k, r_k, n);
     for(int i=0; i<n; i++)
       p_k_1[i] = r_k_1[i] + beta_k*p_k[i];
@@ -73,4 +77,5 @@ float* Grad_Conjug(float** A, float* b, float* x_k, int n)
     }
   }
 }
+
 
