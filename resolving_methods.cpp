@@ -1,4 +1,4 @@
-float* Descente(float** A, int dim, float* vec)
+float* Descent(float** A, int dim, float* vec)
 {
   float* vec1 = new float[dim];
   for(int i=0; i<dim; i++)
@@ -17,7 +17,7 @@ float* Descente(float** A, int dim, float* vec)
 
 
 
-float* Remonte(float** A, int dim, float* vec)
+float* Climb(float** A, int dim, float* vec)
 {
   float* vec1 = new float[dim];
   for(int i=0; i<dim; i++)
