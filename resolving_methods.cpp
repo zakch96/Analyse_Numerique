@@ -1,3 +1,45 @@
+float* Relax(float** A, float* b, float* u_k, int n, float w)
+{
+  float* u_k_1 = new float[n];
+  float* diff = new float[n];
+  float count = 0;
+  for(int i=0;i<n;i++){
+    u_k_1[i] = (1-w)*u_k[i];
+    for(int j=0; j<i; j++)
+      count -= A[i][j]*u_k_1[j];
+    for(int j=i+1; j<n; j++)
+      count -= A[i][j]*u_k[j];
+    for(int i=0; i<n; i++)
+      count += b[i];
+    count = count*w;
+    count = count/A[i][i];
+    u_k_1[i] += count;
+  }
+  for(int i=0; i<n; i++)
+    diff[i] = u_k_1[i] - u_k[i];
+  while(sqrt(Prod_Vec(diff, diff)) > w){
+    for(int i=; i<n; i++)
+      u_k[i] = u_k_1[i];
+    for(int i=0;i<n;i++){
+      u_k_1[i] = (1-w)*u_k[i];
+      for(int j=0; j<i; j++)
+	count -= A[i][j]*u_k_1[j];
+      for(int j=i+1; j<n; j++)
+	count -= A[i][j]*u_k[j];
+      for(int i=0; i<n; i++)
+	count += b[i];
+      count = count*w;
+      count = count/A[i][i];
+      u_k_1[i] += count;
+    }
+  }
+  return u_k_1;
+}
+
+
+
+
+
 
 float* Grad_Conjug(float** A, float* b, float* x_k, int n)
 {
