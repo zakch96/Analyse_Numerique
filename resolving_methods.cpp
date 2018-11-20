@@ -1,3 +1,47 @@
+float*** Cholesky_Factorization(float** A,int n)
+{
+  float*** C; 
+  float** D;
+  float ** L;
+  float s = 0;
+  C= new float**[2];
+  D = new float*[1];
+  L = new float*[n];
+  for(int i=0; i<n; i++)
+    L[i]= new float[n];
+  D[0]= new float[n];
+  for(int j=0; j<n; j++){
+    D[0][j] = A[j][j];
+    for(int k=0; k<j-1; k++1){
+      s+=L[j][k]*L[j][k]*D[0][k];
+    }
+    D[0][j] -= s;
+    s = 0;
+    for(int i=0; i<n; i++){
+      if(i>j){
+	for(int k=0; k<j-1; k++)
+	  s += L[i][k]*L[j][k]*D[0][k];
+	L[i][j] = (A[i][j] - s)/D[0][j];
+	s=0;
+      }
+      else if(i=j) {
+	L[i][j]=1;
+      }
+      else if(i<j) {
+	L[i][j]=0;
+      } 
+    }
+  }
+  C[1]=L;
+  C[2]=D;
+  return C;
+}
+
+
+
+
+
+
 float* Relax(float** A, float* b, float* u_k, int n, float w)
 {
   float* u_k_1 = new float[n];
