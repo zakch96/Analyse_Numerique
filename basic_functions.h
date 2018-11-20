@@ -1,0 +1,11 @@
+float g(float x, float y);
+float f(float x, float y);
+float** Create_Matrix(int n);
+float*** Create_Array_Of_Matrix(int size, int n);
+void Get_Cofactor(float** A, float** temp, int p, int q, int n);
+float Determinant(float** A, int n);
+float** Prod_Mat(float** L, float** A, int n);
+void Adjoint(float** A, float** adj, int n);
+bool Inverse(float** A, float** inverse, int n);
+float* Prod_Mat_Vec(float** A, float* b, int n);
+float Prod_Vec(float* x, float* y, int n);
