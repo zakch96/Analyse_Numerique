@@ -139,7 +139,6 @@ float* Grad_Conjug(float** A, float* b, float* x_k, int n)
     r_k[i] = b[i] - prod_mat_vec[i];
   for(int i=0; i<n; i++)
     p_k[i] = r_k[i];
-  int k = 0;
   float alpha_k;
   float beta_k;
   while(1){
