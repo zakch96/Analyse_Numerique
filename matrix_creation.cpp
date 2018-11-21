@@ -26,6 +26,7 @@ float** Create_A(int n, int m, float h_sqr, float k_sqr, float d, int dim)
       A[i][i+1] = 0;
     count++;
   }
+  return A;
 }
 
 
