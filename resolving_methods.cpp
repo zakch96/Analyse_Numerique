@@ -145,7 +145,7 @@ float* Grad_Conjug(float** A, float* b, float* x_k, int n)
     alpha_k = Prod_Vec(r_k, r_k, n)/Pro_Vec(p_k, Prod_Mat_Vec(A, p_k, n), n);
     for(int i=0; i<n; i++){
       x_k_1[i] = x_k[i] + alpha_k*p_k[i];
-      r_k_1[i] = r_k[i] + alpha_k*p_k[i];
+      r_k_1[i] = r_k[i] - alpha_k*p_k[i];
     }
     count_itere++;
     if("r_k_1 est suffisamment petit"){
