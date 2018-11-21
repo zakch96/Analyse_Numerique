@@ -167,6 +167,45 @@ float* Grad_Conjug(float** A, float* b, float* x_k, int n)
 
 
 
+float* Grad_Conjug_Precond(float** A, float* b, float* x_k, int n)
+{
+  int count_itere = 0;
+  float* r_k = new float[n];
+  float* p_k;
+  float* z_k = new float[n];
+  float* r_k_1 = new float[n];
+  float* x_k_1 = new float[n];
+  float* p_k_1 = new float[n];
+  float** C_1 = new float*[n];
+  float* prod_mat_vec_x = Prod_Mat_Vec(A, x_k, n);
+  for(int i=0; i<n; i++)
+    r_k[i] = b[i] - prod_mat_vec_x[i];
+  for(int i=0; i<n; i++)
+    p_k[i] = r_k[i];
+  float* prod_mat_vec_p = Prod_Mat_Vec(A, p_k, n);
+  float alpha_k;
+  float beta_k;
+  while(1){
+    alpha_k = Prod_Vec(r_k, r_k, n)/Pro_Vec(p_k, prod_mat_vec_p, n);
+    for(int i=0; i<n; i++){
+      x_k_1[i] = x_k[i] + alpha_k*p_k[i];
+      r_k_1[i] = r_k[i] - alpha_k*prod_mat_vec_p[i];
+    }
+    count_itere++;
+    if("r_k_1 est suffisamment petit"){
+      cout << "le nombre d'itérations est" << count_itere << endl;
+      return x_k_1;
+    }
+    beta_k = Prod_Vec(r_k_1, r_k_1, n)/Prod_Vec(r_k, r_k, n);
+    for(int i=0; i<n; i++)
+      p_k_1[i] = r_k_1[i] + beta_k*p_k[i];
+  }
+}
+
+
+
+
+
 
 float** Cholesky_Decomp(float** A, int dim)
 {
